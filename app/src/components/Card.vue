@@ -7,9 +7,10 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">Nome: </h5>
-        <p class="card-text">Class:</p>
-        <p class="card-text">Abilidade:</p>
+        <h5 class="card-title">Nome: {{name}}</h5>
+        <p class="card-text">Weight:</p>
+        <p class="card-text">Height: </p>
+         <button class="btn btn-primary" @click="pokeInfo()">Mais informacoes</button>
       </div>
     </div>
   </div>
@@ -18,6 +19,26 @@
 </template>
 <script>
 export default {
-  name: 'Card'
+  name: 'Card',
+  data(){
+    return {
+      infos: []
+    }
+  },
+  props: {
+    name: String,
+    id: Number
+  },
+  methods: {
+      pokeInfo(){
+        const url = 'https://pokeapi.co/api/v2/pokemon/'
+        fetch(url + this.id)
+        .then(response => response.json())
+    .then(data => {
+      this.infos = data
+    })
+    .catch(err => console.log(err));
+      }
+  }
 }
 </script>
