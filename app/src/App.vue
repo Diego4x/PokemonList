@@ -37,9 +37,8 @@ export default {
     getData(){
       const baseUrl = 'https://pokeapi.co/api/v2/pokemon/'
       const name = this.text
-      name.toLowerCase()
       this.dados = []
-      fetch(baseUrl + name)
+      fetch(baseUrl + name.toLowerCase())
     .then(response => response.json())
     .then(data => {
       this.dados = data
